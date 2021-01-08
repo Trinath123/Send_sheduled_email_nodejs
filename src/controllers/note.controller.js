@@ -10,18 +10,18 @@ exports.sendMail = async (req, res) => {
             secure: false,
             auth: {
                 user: 'trinathquintus@gmail.com',
-                pass: 'Trinath75@'
+                pass: '********'
             }
         });
 
         var mailOptions = {
             from: 'trinathquintus@gmail.com',
-            to: 'mksaini026@gmail.com',
-            subject: 'Sending Email using Node.js',
-            text: 'That was easy!'
+            to: req.body.email,
+            subject: req.body.subject,
+            text: req.body.message
         };
 
-        await cron.schedule('2 * * * *', () => {
+        await cron.schedule('* * * * *', () => {
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
                     console.log(error);
